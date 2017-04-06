@@ -59,6 +59,12 @@ module.exports = {
         require('autoprefixer')
     ],
 
+    resolve: {
+        alias: {
+            jquery: __dirname + '/static/common/jquery'
+        }
+    },
+
     /*实现自动输出index.html并自动添加js文件并输出*/
     plugins: [
         new webpack.ProvidePlugin({
@@ -66,6 +72,7 @@ module.exports = {
             $: "jquery"
         }),
         new ExtractTextPlugin("static/css/[name].css"),
+        new  webpack.optimize.CommonsChunkPlugin('jquery.js',['jquery']),
         new HtmlWebpackPlugin({
             chunks: [
                 'index',
