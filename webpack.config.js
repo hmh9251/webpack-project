@@ -2,6 +2,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',//有四种配置方式，由慢到快，也是由好到差
@@ -96,7 +97,12 @@ module.exports = {
             template: 'page/admin.js',
             hash: true
         }),
-        new webpack.HotModuleReplacementPlugin()//热加载插件
+        new webpack.HotModuleReplacementPlugin(),//热加载插件
+         new CopyWebpackPlugin([
+             {
+                from: './static/common/lib/jquery.js',
+                to: './build/static/lib/jquery.js',
+            }])
     ],
 
     /*配置webpack-dev-server服务的设置*/
